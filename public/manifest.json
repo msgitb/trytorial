@@ -1,0 +1,16 @@
+{
+  "short_name": "Tridactyl Tutor",
+  "name": "Tridactyl Interactive Tutorial",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512 any",
+      "purpose": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#06060e",
+  "background_color": "#06060e"
+}

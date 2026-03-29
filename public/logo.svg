@@ -1,0 +1,20 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#06060e"/>
+  
+  <!-- Outer circle -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#a855f7" stroke-width="3"/>
+  
+  <!-- T shape for Tridactyl -->
+  <g fill="#a855f7">
+    <!-- Horizontal bar (top) -->
+    <rect x="60" y="50" width="80" height="15" rx="3"/>
+    <!-- Vertical bar (stem) -->
+    <rect x="90" y="65" width="20" height="70" rx="3"/>
+  </g>
+  
+  <!-- Vim mode indicator dots (for visual reference) -->
+  <circle cx="70" cy="140" r="4" fill="#22d3ee"/>
+  <circle cx="100" cy="140" r="4" fill="#f59e0b"/>
+  <circle cx="130" cy="140" r="4" fill="#fb923c"/>
+</svg>
