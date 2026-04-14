@@ -17,6 +17,7 @@ export const BrowserSimulator = forwardRef(
       hintInput,
       hintSubmode,
       visualLines,
+      visualAnchor,
       visualInput,
       visualSubmode,
       zoomLevel,

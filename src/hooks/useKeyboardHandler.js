@@ -21,6 +21,8 @@ export function useKeyboardHandler({
   setKeycount,
   visualLines,
   setVisualLines,
+  visualAnchor,
+  setVisualAnchor,
   visualSubmode,
   setVisualSubmode,
   zoomLevel,
@@ -77,10 +79,20 @@ export function useKeyboardHandler({
       }
       if (m === MODES.VISUAL) {
         setVisualLines(-1);
+        setVisualAnchor(-1);
         setVisualSubmode("select");
       }
     },
-    [setMode, setCmdInput, setHintInput, setHintSubmode, setVisualInput, setVisualLines, setVisualSubmode],
+    [
+      setMode,
+      setCmdInput,
+      setHintInput,
+      setHintSubmode,
+      setVisualInput,
+      setVisualLines,
+      setVisualAnchor,
+      setVisualSubmode,
+    ],
   );
 
   useEffect(() => {
@@ -247,6 +259,7 @@ export function useKeyboardHandler({
             // User typed a valid label
             const ni = visualInput + charUpper;
             setVisualInput(ni);
+            setVisualAnchor(labelIdx);
             setVisualLines(labelIdx);
 
             if (
@@ -557,11 +570,14 @@ export function useKeyboardHandler({
     setHintSubmode,
     setSequence,
     setVisualLines,
+    setVisualAnchor,
     setVisualSubmode,
     setZoomLevel,
     setKeycount,
     keycount,
     zoomLevel,
+    visualAnchor,
+    visualLines,
     currentChapterIdx,
     currentExerciseIdx,
     setExerciseIdx,
