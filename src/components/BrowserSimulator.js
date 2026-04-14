@@ -90,6 +90,11 @@ export const BrowserSimulator = forwardRef(
         </span>
       );
     };
+
+    const getVisualLinesCount = (visualAnchor, visualLines) => {
+      return visualAnchor < 0 ? 0 : Math.abs(visualAnchor - visualLines) + 1;
+    };
+
     return (
       <div
         style={{
@@ -324,7 +329,10 @@ export const BrowserSimulator = forwardRef(
                   animation: "pulse 2s ease infinite",
                 }}
               >
-                ▌ Visual — {visualLines} line{visualLines !== 1 ? "s" : ""}{" "}
+                ▌ Visual — {getVisualLinesCount(visualAnchor, visualLines)} line
+                {getVisualLinesCount(visualAnchor, visualLines) !== 1
+                  ? "s"
+                  : ""}{" "}
                 selected
               </div>
             )}
