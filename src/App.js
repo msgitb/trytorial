@@ -35,7 +35,7 @@ export default function App() {
   const [visualInput, setVisualInput] = useState("");
   const [visualSubmode, setVisualSubmode] = useState("select");
   const [keycount, setKeycount] = useState(0);
-  const [visualLines, setVisualLines] = useState(0);
+  const [visualLines, setVisualLines] = useState(-1);
   const [zoomLevel, setZoomLevel] = useState(100);
 
   const pageRef = useRef(null);

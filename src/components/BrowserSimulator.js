@@ -28,8 +28,8 @@ export const BrowserSimulator = forwardRef(
 
     // Helper to determine if a line index should be highlighted
     const getLineHighlight = (lineIdx) => {
-      if (mode !== MODES.VISUAL || visualLines === 0) return {};
-      if (lineIdx < visualLines) {
+      if (mode !== MODES.VISUAL || visualLines < 0) return {};
+      if (lineIdx === visualLines) {
         return {
           background: "#fb923c22",
           transition: "background 0.1s ease-out",

@@ -76,7 +76,7 @@ export function useKeyboardHandler({
         setVisualInput("");
       }
       if (m === MODES.VISUAL) {
-        setVisualLines(0);
+        setVisualLines(-1);
         setVisualSubmode("select");
       }
     },
@@ -234,7 +234,7 @@ export function useKeyboardHandler({
             // User typed a valid label
             const ni = visualInput + charUpper;
             setVisualInput(ni);
-            setVisualLines(labelIdx + 1);
+            setVisualLines(labelIdx);
 
             if (
               cur.type === "inMode" &&
