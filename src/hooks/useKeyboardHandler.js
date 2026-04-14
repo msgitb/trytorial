@@ -226,7 +226,20 @@ export function useKeyboardHandler({
 
         // Visual mode: type label to select
         if (e.key.length === 1) {
-          const visualLabels = ["A", "S", "D", "F", "J", "K", "L", "G", "Q", "W", "E", "R"];
+          const visualLabels = [
+            "A",
+            "S",
+            "D",
+            "F",
+            "H",
+            "L",
+            "G",
+            "Z",
+            "Q",
+            "W",
+            "E",
+            "R",
+          ];
           const charUpper = e.key.toUpperCase();
           const labelIdx = visualLabels.indexOf(charUpper);
 

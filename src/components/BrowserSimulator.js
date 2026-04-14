@@ -24,7 +24,21 @@ export const BrowserSimulator = forwardRef(
     pageRef,
   ) => {
     // Visual mode labels (for 12 content blocks)
-    const visualLabels = ["A", "S", "D", "F", "J", "K", "L", "G", "Q", "W", "E", "R"];
+    // Note: J and K are excluded to avoid conflicts with normal mode shortcuts
+    const visualLabels = [
+      "A",
+      "S",
+      "D",
+      "F",
+      "H",
+      "L",
+      "G",
+      "Z",
+      "Q",
+      "W",
+      "E",
+      "R",
+    ];
 
     // Helper to determine if a line index should be highlighted
     const getLineHighlight = (lineIdx) => {
