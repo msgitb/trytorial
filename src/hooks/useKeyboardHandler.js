@@ -236,6 +236,32 @@ export function useKeyboardHandler({
           return;
         }
 
+        // Visual mode: J/K to expand selection
+        if (e.key === "j") {
+          const currentLine = visualLines;
+          if (currentLine >= 0 && currentLine < 11) {
+            // Set anchor if not set
+            if (visualAnchor < 0) {
+              setVisualAnchor(currentLine);
+            }
+            const newLine = currentLine + 1;
+            setVisualLines(newLine);
+          }
+          return;
+        }
+        if (e.key === "k") {
+          const currentLine = visualLines;
+          if (currentLine > 0) {
+            // Set anchor if not set
+            if (visualAnchor < 0) {
+              setVisualAnchor(currentLine);
+            }
+            const newLine = currentLine - 1;
+            setVisualLines(newLine);
+          }
+          return;
+        }
+
         // Visual mode: type label to select
         if (e.key.length === 1) {
           const visualLabels = [

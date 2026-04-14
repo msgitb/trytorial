@@ -44,11 +44,25 @@ export const BrowserSimulator = forwardRef(
     // Helper to determine if a line index should be highlighted
     const getLineHighlight = (lineIdx) => {
       if (mode !== MODES.VISUAL || visualLines < 0) return {};
-      if (lineIdx === visualLines) {
-        return {
-          background: "#fb923c22",
-          transition: "background 0.1s ease-out",
-        };
+
+      // If anchor is set, highlight range from anchor to cursor
+      if (visualAnchor >= 0) {
+        const start = Math.min(visualAnchor, visualLines);
+        const end = Math.max(visualAnchor, visualLines);
+        if (lineIdx >= start && lineIdx <= end) {
+          return {
+            background: "#fb923c22",
+            transition: "background 0.1s ease-out",
+          };
+        }
+      } else {
+        // No anchor set, only highlight the cursor line
+        if (lineIdx === visualLines) {
+          return {
+            background: "#fb923c22",
+            transition: "background 0.1s ease-out",
+          };
+        }
       }
       return {};
     };
