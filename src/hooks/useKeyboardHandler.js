@@ -21,6 +21,8 @@ export function useKeyboardHandler({
   setKeycount,
   visualLines,
   setVisualLines,
+  visualAnchor,
+  setVisualAnchor,
   visualSubmode,
   setVisualSubmode,
   zoomLevel,
@@ -76,11 +78,21 @@ export function useKeyboardHandler({
         setVisualInput("");
       }
       if (m === MODES.VISUAL) {
-        setVisualLines(0);
+        setVisualLines(-1);
+        setVisualAnchor(-1);
         setVisualSubmode("select");
       }
     },
-    [setMode, setCmdInput, setHintInput, setHintSubmode, setVisualInput, setVisualLines, setVisualSubmode],
+    [
+      setMode,
+      setCmdInput,
+      setHintInput,
+      setHintSubmode,
+      setVisualInput,
+      setVisualLines,
+      setVisualAnchor,
+      setVisualSubmode,
+    ],
   );
 
   useEffect(() => {
@@ -224,9 +236,48 @@ export function useKeyboardHandler({
           return;
         }
 
+        // Visual mode: J/K to expand selection
+        if (e.key === "j") {
+          const currentLine = visualLines;
+          if (currentLine >= 0 && currentLine < 11) {
+            // Set anchor if not set
+            if (visualAnchor < 0) {
+              setVisualAnchor(currentLine);
+            }
+            const newLine = currentLine + 1;
+            setVisualLines(newLine);
+          }
+          return;
+        }
+        if (e.key === "k") {
+          const currentLine = visualLines;
+          if (currentLine > 0) {
+            // Set anchor if not set
+            if (visualAnchor < 0) {
+              setVisualAnchor(currentLine);
+            }
+            const newLine = currentLine - 1;
+            setVisualLines(newLine);
+          }
+          return;
+        }
+
         // Visual mode: type label to select
         if (e.key.length === 1) {
-          const visualLabels = ["A", "S", "D", "F", "J", "K", "L", "G", "Q", "W", "E", "R"];
+          const visualLabels = [
+            "A",
+            "S",
+            "D",
+            "F",
+            "H",
+            "L",
+            "G",
+            "Z",
+            "Q",
+            "W",
+            "E",
+            "R",
+          ];
           const charUpper = e.key.toUpperCase();
           const labelIdx = visualLabels.indexOf(charUpper);
 
@@ -234,7 +285,8 @@ export function useKeyboardHandler({
             // User typed a valid label
             const ni = visualInput + charUpper;
             setVisualInput(ni);
-            setVisualLines(labelIdx + 1);
+            setVisualAnchor(labelIdx);
+            setVisualLines(labelIdx);
 
             if (
               cur.type === "inMode" &&
@@ -544,11 +596,14 @@ export function useKeyboardHandler({
     setHintSubmode,
     setSequence,
     setVisualLines,
+    setVisualAnchor,
     setVisualSubmode,
     setZoomLevel,
     setKeycount,
     keycount,
     zoomLevel,
+    visualAnchor,
+    visualLines,
     currentChapterIdx,
     currentExerciseIdx,
     setExerciseIdx,

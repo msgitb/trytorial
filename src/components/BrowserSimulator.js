@@ -17,6 +17,7 @@ export const BrowserSimulator = forwardRef(
       hintInput,
       hintSubmode,
       visualLines,
+      visualAnchor,
       visualInput,
       visualSubmode,
       zoomLevel,
@@ -24,16 +25,44 @@ export const BrowserSimulator = forwardRef(
     pageRef,
   ) => {
     // Visual mode labels (for 12 content blocks)
-    const visualLabels = ["A", "S", "D", "F", "J", "K", "L", "G", "Q", "W", "E", "R"];
+    // Note: J and K are excluded to avoid conflicts with normal mode shortcuts
+    const visualLabels = [
+      "A",
+      "S",
+      "D",
+      "F",
+      "H",
+      "L",
+      "G",
+      "Z",
+      "Q",
+      "W",
+      "E",
+      "R",
+    ];
 
     // Helper to determine if a line index should be highlighted
     const getLineHighlight = (lineIdx) => {
-      if (mode !== MODES.VISUAL || visualLines === 0) return {};
-      if (lineIdx < visualLines) {
-        return {
-          background: "#fb923c22",
-          transition: "background 0.1s ease-out",
-        };
+      if (mode !== MODES.VISUAL || visualLines < 0) return {};
+
+      // If anchor is set, highlight range from anchor to cursor
+      if (visualAnchor >= 0) {
+        const start = Math.min(visualAnchor, visualLines);
+        const end = Math.max(visualAnchor, visualLines);
+        if (lineIdx >= start && lineIdx <= end) {
+          return {
+            background: "#fb923c22",
+            transition: "background 0.1s ease-out",
+          };
+        }
+      } else {
+        // No anchor set, only highlight the cursor line
+        if (lineIdx === visualLines) {
+          return {
+            background: "#fb923c22",
+            transition: "background 0.1s ease-out",
+          };
+        }
       }
       return {};
     };
@@ -61,6 +90,11 @@ export const BrowserSimulator = forwardRef(
         </span>
       );
     };
+
+    const getVisualLinesCount = (visualAnchor, visualLines) => {
+      return visualAnchor < 0 ? 0 : Math.abs(visualAnchor - visualLines) + 1;
+    };
+
     return (
       <div
         style={{
@@ -295,7 +329,10 @@ export const BrowserSimulator = forwardRef(
                   animation: "pulse 2s ease infinite",
                 }}
               >
-                ▌ Visual — {visualLines} line{visualLines !== 1 ? "s" : ""}{" "}
+                ▌ Visual — {getVisualLinesCount(visualAnchor, visualLines)} line
+                {getVisualLinesCount(visualAnchor, visualLines) !== 1
+                  ? "s"
+                  : ""}{" "}
                 selected
               </div>
             )}

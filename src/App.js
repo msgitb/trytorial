@@ -36,6 +36,7 @@ export default function App() {
   const [visualSubmode, setVisualSubmode] = useState("select");
   const [keycount, setKeycount] = useState(0);
   const [visualLines, setVisualLines] = useState(0);
+  const [visualAnchor, setVisualAnchor] = useState(-1);
   const [zoomLevel, setZoomLevel] = useState(100);
 
   const pageRef = useRef(null);
@@ -73,6 +74,8 @@ export default function App() {
     setKeycount,
     visualLines,
     setVisualLines,
+    visualAnchor,
+    setVisualAnchor,
     visualSubmode,
     setVisualSubmode,
     zoomLevel,
@@ -227,6 +230,7 @@ export default function App() {
           visualInput={visualInput}
           visualSubmode={visualSubmode}
           visualLines={visualLines}
+          visualAnchor={visualAnchor}
           zoomLevel={zoomLevel}
         />
       </div>
